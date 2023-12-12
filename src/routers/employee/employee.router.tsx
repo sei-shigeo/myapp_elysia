@@ -1,7 +1,6 @@
 import { html } from "@elysiajs/html";
 import { Elysia, t } from "elysia";
-import { brotliDecompressSync } from "zlib";
-import { BaseHtml } from "../../components/html/Base";
+import { BaseHtml, DashBoard } from "../../components/html/Base";
 
 // 従業員 関連
 export const employeeRouter = new Elysia().group("/employee", (app) =>
@@ -54,23 +53,23 @@ export const employeeRouter = new Elysia().group("/employee", (app) =>
 
 const employeePage = () => {
   return (
-    <BaseHtml>
+    <DashBoard>
       <div>
         <h1>Employee Page</h1>
         <p>従業員 一覧表</p>
       </div>
-    </BaseHtml>
+    </DashBoard>
   );
 };
 
 // 詳細
 const employeeDtailPage = (id: string) => {
   return (
-    <BaseHtml>
+    <DashBoard>
       <div>
         <h1>Employee Page</h1>
         <p>従業員 詳細</p>
       </div>
-    </BaseHtml>
+    </DashBoard>
   );
 };

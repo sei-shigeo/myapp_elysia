@@ -1,6 +1,6 @@
 import { html } from "@elysiajs/html";
 import { Elysia, t } from "elysia";
-import { BaseHtml } from "../../components/html/Base";
+import { BaseHtml, DashBoard } from "../../components/html/Base";
 
 // 受注 関連
 export const ordersRouter = new Elysia().group("/orders", (app) =>
@@ -51,23 +51,23 @@ export const ordersRouter = new Elysia().group("/orders", (app) =>
 
 const ordersPage = () => {
   return (
-    <BaseHtml>
+    <DashBoard>
       <div>
         <h1>Orders Page</h1>
 
         <p>トラック 一覧表</p>
       </div>
-    </BaseHtml>
+    </DashBoard>
   );
 };
 // 詳細
 const ordersDtailPage = (id: string) => {
   return (
-    <BaseHtml>
+    <DashBoard>
       <div>
         <h1>Orders Dtail Page</h1>
         <p>受注 詳細</p>
       </div>
-    </BaseHtml>
+    </DashBoard>
   );
 };

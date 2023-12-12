@@ -1,6 +1,6 @@
 import { html } from "@elysiajs/html";
 import { Elysia, t } from "elysia";
-import { BaseHtml } from "../../components/html/Base";
+import { BaseHtml, DashBoard } from "../../components/html/Base";
 
 // トラック 関連
 export const truckRouter = new Elysia().group("/truck", (app) =>
@@ -51,22 +51,22 @@ export const truckRouter = new Elysia().group("/truck", (app) =>
 
 const truckPage = () => {
   return (
-    <BaseHtml>
+    <DashBoard>
       <div>
         <h1>Truck Page</h1>
         <p>トラック 一覧表</p>
       </div>
-    </BaseHtml>
+    </DashBoard>
   );
 };
 // 詳細
 const truckDtailPage = (id: string) => {
   return (
-    <BaseHtml>
+    <DashBoard>
       <div>
         <h1>Truck Dtail Page</h1>
         <p>トラック 詳細</p>
       </div>
-    </BaseHtml>
+    </DashBoard>
   );
 };

@@ -1,6 +1,6 @@
 import { html } from "@elysiajs/html";
 import { Elysia, t } from "elysia";
-import { BaseHtml } from "../../components/html/Base";
+import { BaseHtml, DashBoard } from "../../components/html/Base";
 
 // 受注 関連
 export const luggageRouter = new Elysia().group("/luggage", (app) =>
@@ -55,23 +55,23 @@ export const luggageRouter = new Elysia().group("/luggage", (app) =>
 
 const luggagePage = () => {
   return (
-    <BaseHtml>
+    <DashBoard>
       <div>
         <h1>luggage Page</h1>
         <p>商品 一覧表</p>
       </div>
-    </BaseHtml>
+    </DashBoard>
   );
 };
 
 // 詳細
 const luggageDtailPage = (id: string) => {
   return (
-    <BaseHtml>
+    <DashBoard>
       <div>
         <h1>Luggage Dtail Page</h1>
         <p>商品 詳細</p>
       </div>
-    </BaseHtml>
+    </DashBoard>
   );
 };

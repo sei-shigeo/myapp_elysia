@@ -1,25 +1,24 @@
 import { html } from "@elysiajs/html";
 import { Elysia, t } from "elysia";
 import { BaseHtml } from "../../components/html/Base";
+import { authModel, authType } from "./auth.model";
 
 export const authRouter = new Elysia().group("/auth", (app) =>
   app
+    .use(authModel)
     .use(html())
     .get("/sign-in", ({ html }) => html(signIn))
     .post(
       "/sign-in",
       ({ body }) => {
-        const { name, email } = body;
+        const { email, password } = body;
 
         return {
           message: "サインイン できました。",
         };
       },
       {
-        body: t.Object({
-          name: t.String(),
-          email: t.String(),
-        }),
+        body: "auth.signin",
       }
     )
     .get("/sign-up", ({ html }) => html(signUp))
@@ -33,34 +32,27 @@ export const authRouter = new Elysia().group("/auth", (app) =>
         };
       },
       {
-        body: t.Object({
-          name: t.String(),
-          email: t.String(),
-          password: t.String(),
-        }),
+        body: "auth.signup",
       }
     )
 );
 
+interface clientFormProps {
+  title: string;
+  name?: string;
+  email: string;
+  password: string;
+  status?: boolean;
+}
 const signIn = () => {
   return (
     <BaseHtml>
-      <div>
-        <h1>サインイン 画面</h1>
-        <div>
-          <form action="" method="POST">
-            <div>
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" />
-            </div>
-            <div>
-              <label for="passward">Passward</label>
-              <input type="password" name="passward" id="passward" />
-            </div>
-            <button type="submit">Sing In</button>
-          </form>
-        </div>
-      </div>
+      <ClientForm
+        title="Sign In"
+        name="name"
+        email="email"
+        password="passward"
+      />
     </BaseHtml>
   );
 };
@@ -68,26 +60,67 @@ const signIn = () => {
 const signUp = () => {
   return (
     <BaseHtml>
-      <div>
-        <h1>サインアップ 画面</h1>
-        <div>
+      <ClientForm
+        title="Sign Up"
+        email="email"
+        password="passward"
+        status
+      />
+    </BaseHtml>
+  );
+};
+
+const ClientForm = (props: clientFormProps) => {
+  return (
+    <main class="flex justify-center w-full ">
+      <section class="w-[560px] m-36">
+        <h1>{props.title}</h1>
+        <div class="my-10 py-10 px-6 border rounded shadow-xl">
           <form action="" method="POST">
-            <div>
-              <label for="name">Name</label>
-              <input type="name" name="name" id="name" />
+            {props.status && (
+              <div class="mb-4 flex items-center ">
+                <label for={props.name} class="flex-none w-32">
+                  {props.name}
+                </label>
+                <input
+                  type="text"
+                  name={props.name}
+                  id={props.name}
+                  placeholder={props.name}
+                  class="flex-1"
+                />
+              </div>
+            )}
+            <div class="mb-4 flex items-center ">
+              <label for={props.email} class="flex-none w-32">
+                {props.email}
+              </label>
+              <input
+                type={props.email}
+                name={props.email}
+                id={props.email}
+                placeholder={props.email}
+                class="flex-1"
+              />
             </div>
-            <div>
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" />
+            <div class="mt-4 flex items-center">
+              <label for={props.password} class="flex-none w-32">
+                {props.password}
+              </label>
+              <input
+                type={props.password}
+                name={props.password}
+                id={props.password}
+                placeholder={props.password}
+                class="flex-1"
+              />
             </div>
-            <div>
-              <label for="passward">Passward</label>
-              <input type="password" name="passward" id="passward" />
-            </div>
-            <button type="submit">Sing Up</button>
           </form>
         </div>
-      </div>
-    </BaseHtml>
+        <button type="submit" class="primary_button">
+          {props.title}
+        </button>
+      </section>
+    </main>
   );
 };

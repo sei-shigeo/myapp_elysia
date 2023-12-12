@@ -3,7 +3,8 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/server.tsx"
+    "dev": "bun run --hot src/server.tsx",
+    "tailwind":"bunx tailwindcss -i ./public/styles/input.css -o ./public/dist/output.css --watch"
   },
   "dependencies": {
     "@elysiajs/html": "^0.7.3",
@@ -12,7 +13,8 @@
     "elysia": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "tailwindcss": "^3.3.6"
   },
   "module": "src/index.js"
 }
